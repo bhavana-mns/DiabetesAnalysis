@@ -1,0 +1,11 @@
+library(VIM)
+library(readr)
+library(missForest)
+library(mi)
+meal <- read_csv("C:/Bhavana/Profesional/Sem5/BD/CCBD/meal 21.csv")
+
+meal.mis <- prodNA(meal, noNA = 0.1)
+meal.mis <- subset(meal.mis, select = -c(`pre lun insulin`))
+meal.mis <- subset(meal.mis, select = -c(Date))
+#meal.mis$imputed_age <- with(meal.mis, impute(`pre breakfast`, mean))
+mi_data <- mi(meal.mis, seed = 335)
